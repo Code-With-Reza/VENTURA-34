@@ -18,8 +18,8 @@ commit_batch() {
   git commit -m "$batch_msg"
 }
 
-# Get a list of all changed files
-changed_files=($(git status --porcelain | awk '{print $2}'))
+# Get a list of all changed and untracked files
+changed_files=($(git status --porcelain | awk '{if ($1 == "??") print $2; else print $2}'))
 
 # Batch size
 batch_size=100
