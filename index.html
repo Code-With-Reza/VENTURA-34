@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <title>VENTURA 34</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prettyPhoto/3.1.6/css/prettyPhoto.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.0/css/swiper.min.css'>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Website kelas X-11">
+  <meta name="author" content="Raja">
+  <link rel="stylesheet" href="css/all.css">
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+  <!-- Navigation -->
+  <nav id="menu" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span
+            class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        <a class="navbar-brand page-scroll" href="#page-top"><i class='fas fa-award'></i> VENTURA 34</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#tentang" class="page-scroll">Tentang</a></li>
+          <li><a href="#siswa" class="page-scroll">Siswa</a></li>
+          <li><a href="#mapel" class="page-scroll">Tim Mapel</a></li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+
+  <!--My header -->
+  <header id="header">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide sl1">
+          <div class="overlay">
+            <div class="h-text">
+              <div class="l1">Kebangsaan</div>
+              <div class="l2">Kejuangan</div>
+              <div class="l3">Kebudayaan</div>
+              <div class="l5 h-btn"><a href="#tentang" class="btn btn-custom btn-lg page-scroll">Tentang Kami</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide sl2">
+          <div class="overlay">
+            <div class="h-text">
+              <div class="l1">Jujur</div>
+              <div class="l2">Cerdas</div>
+              <div class="l3">Kreatif</div>
+              <div class="l4 h-btn"><a href="#siswa" class="btn btn-custom btn-lg page-scroll">Siswa X-11</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide sl3">
+          <div class="overlay">
+            <div class="h-text">
+              <div class="l1">Berani</div>
+              <div class="l2">Benar</div>
+              <div class="l3">Berhasil</div>
+              <div class="l4 h-btn"><a href="#mapel" class="btn btn-custom btn-lg page-scroll">Tim Ventura</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"><i class="fas fa-chevron-circle-left"></i></div>
+      <div class="swiper-button-next"><i class="fas fa-chevron-circle-right"></i></div>
+    </div>
+  </header>
+
+  <!-- Tentang Section -->
+  <div id="tentang">
+    <div class="container">
+      <div class="col-md-8 col-md-offset-2 section-title text-center">
+        <h2>Tentang Kami</h2>
+        <p>VENTURA merupakan singkatan dari ELEVEN TARUNA NUSANTARA yaitu nama kelas X-11. Kelas X-11 tahun ajaran
+          2023/2024 memiliki 31 siswa siswi TN 34 yang menjadi bagian dari Ventura Angkatan 34. Wali Kelas kami adalah
+          Pamong Seni Budaya, Bu Marlina M.Pd. Ventura Angkatan 34 merupakan salah satu kelas yang terbilang pasif
+          diantara kelas-kelas yang lain. Meski begitu, kami yakin dimana ada kekurangan, pasti ada juga kelebihannya,
+          yaitu mencetak prestasi tinggi yang membanggakan.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Siswa Section -->
+  <div id="siswa">
+    <div class="container">
+      <div class="col-md-8 col-md-offset-2 section-title text-center">
+        <h2>Siswa X-11</h2>
+        <p>Berikut siswa kelas X-11 berdasarkan absen.</p>
+      </div>
+
+      <div class="row">
+
+        <!-- Template -->
+        <?php
+        $lines = explode("\n",file_get_contents("data.txt"));
+        foreach ($lines as $line): 
+        $i = explode(",",$line);
+        $nama = $i[0];
+        $ttl = $i[2];
+        $tempat = $i[3];
+        $path = "/siswa/".$i[1].".png";
+        ?>
+        <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    <?= $nama; ?>
+                  </h4>
+                  <small>
+                    <?= $tempat; ?>,
+                    <?= $ttl; ?>
+                  </small>
+                </div>
+                <img class="center-this" width="70%" src="<?= $path; ?>" class="img-responsive" alt="<?= $nama; ?>">
+              </div>
+            </div>
+          </div>
+        </div>
+        <?php endforeach; ?>
+
+
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Tim Section -->
+  <div id="mapel" class="skills">
+    <div class="container">
+      <div class="sk_title">
+
+      </div>
+      <div class="skills-bars row">
+        <div class="col-md-6">
+          <ul class="skills-bar-container">
+
+
+
+            <li>
+              <div class="row">
+                <div class="col-sm-2 icon">
+                  <div id="h-icon"><i class="mIcon fa fa-calculator-simple fa-duotone"></i></div>
+                </div>
+                <div class="col-sm-10 show">
+                  <div class="progressbar-title" style="color: #333;">
+                    <h3>TOMAT</h3>
+                    <p>Tim Olimpiade Matematika atau yang disingkat Tomat adalah Tim mata pelajaran Matematika di SMA TN</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="row">
+                <div class="col-sm-2 icon">
+                  <div id="h-icon"><i class="mIcon fa fa-duotone fa-money-bill-1-wave"></i></div>
+                </div>
+                <div class="col-sm-10 show">
+                  <div class="progressbar-title" style="color: #333;">
+                    <h3>TNEC</h3>
+                    <p>Taruna Nusantara Economics Club atau Tim mata pelajaran Ekonomi di SMA TN</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="row">
+                <div class="col-sm-2 icon">
+                  <div id="h-icon"><i class="mIcon fa fa-uniform-martial-arts fa-duotone"></i></div>
+                </div>
+                <div class="col-sm-10 show">
+                  <div class="progressbar-title" style="color: #333;">
+                    <h3>PASKARA</h3>
+                    <p>Pasukan Karate Taruna Nusantara adalah Tim bela diri bidang Karate</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="row">
+                <div class="col-sm-2 icon">
+                  <div id="h-icon"><i class="mIcon fa fa-duotone fa-basketball"></i></div>
+                </div>
+                <div class="col-sm-10 show">
+                  <div class="progressbar-title" style="color: #333;">
+                    <h3>RED TEAM</h3>
+                    <p>Adalah Tim Bola Basket SMA Taruna Nusantara</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="row">
+                <div class="col-sm-2 icon">
+                  <div id="h-icon"><i class="mIcon fa fa-duotone fa-earth-asia"></i></div>
+                </div>
+                <div class="col-sm-10 show">
+                  <div class="progressbar-title" style="color: #333;">
+                    <h3>KEBUMIAN</h3>
+                    <p>Tim mata pelajaran Geografi SMA TN</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      
+      </div>
+    </div>
+  </div>
+
+  <!-- Experience Section -->
+
+  <div id="experience">
+    <div class="container">
+      <section class="timeline">
+        <ul>
+          <li>
+            <div>
+              <h1>1934</h1>
+              <h2>HIT</h2>
+              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et
+                accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h1>1937</h1>
+              <h2>HIT</h2>
+              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et
+                accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h1>1940</h1>
+              <h2>HIT</h2>
+              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et
+                accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h1>1943</h1>
+              <h2>HIT</h2>
+              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et
+                accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h1>1946</h1>
+              <h2>HIT</h2>
+              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et
+                accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h1>1956</h1>
+              <h2>HIT</h2>
+              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et
+                accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div id="contact" class="text-center">
+    <div class="overlay">
+      <div class="container">
+        <div class="col-md-8 col-md-offset-2 section-title">
+          <h2>Get In Touch</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo
+            nibh ante facilisis bibendum dolor apibus lornare diam commodo nibh.</p>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+
+          <div class="social" style="font-size:6vw;">
+            <ul>
+              <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+              </li>
+              <li><a href="#"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    <div class="container text-center">
+      <div class="fnav">
+        <p>Copyright &copy; 2024 Ventura 34. Designed by Raja</p>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+  <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.6/SmoothScroll.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jqBootstrapValidation/1.3.7/jqBootstrapValidation.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/prettyPhoto/3.1.6/js/jquery.prettyPhoto.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.0/js/swiper.min.js'></script>
+  <script src="./script.js"></script>
+
+</body>
+
+</html>
