@@ -21,7 +21,7 @@
             const intervalTime = 1000; // 1 second
 
             // Fetch the list of image URLs
-            fetch('/ventura/list.txt')
+            fetch('/list.txt')
                 .then(response => response.text())
                 .then(data => {
                     imageUrls = data.split('\n').filter(url => url.trim() !== "");
@@ -36,7 +36,7 @@
                 setInterval(() => {
                     if (imageUrls.length > 0) {
                         for (let img of images) {
-                            img.src = "/ventura/siswa/"+imageUrls[currentIndex]+".png";
+                            img.src = "/siswa/"+imageUrls[currentIndex]+".png";
                         }
                         currentIndex = (currentIndex + 1) % imageUrls.length;
                     }
