@@ -1,30 +1,56 @@
 <!DOCTYPE html>
-<html lang="id">
-
-<head>
+<html lang="id"><head>
   <meta charset="UTF-8">
   <title>VENTURA 34</title>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prettyPhoto/3.1.6/css/prettyPhoto.css'>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.0/css/swiper.min.css'>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettyPhoto/3.1.6/css/prettyPhoto.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.0/css/swiper.min.css">
+  <link rel="stylesheet" href="styles.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Website kelas X-11">
   <meta name="author" content="Raja">
   <link rel="stylesheet" href="css/all.css">
 
-</head>
+<script src="chrome-extension://ojaffphbffmdaicdkahnmihipclmepok/static/js/workers.min.js"></script></head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" data-new-gr-c-s-check-loaded="14.1176.0" data-gr-ext-installed="">
+<script>
+ document.addEventListener("DOMContentLoaded", () => {
+  let imageUrls = [];
+            let currentIndex = 0;
+            const intervalTime = 1000; // 1 second
+
+            // Fetch the list of image URLs
+            fetch('/ventura/list.txt')
+                .then(response => response.text())
+                .then(data => {
+                    imageUrls = data.split('\n').filter(url => url.trim() !== "");
+                    startImageRotation();
+                })
+                .catch(error => console.error('Error fetching the image list:', error));
+
+            function startImageRotation() {
+                const portfolioItems = document.querySelector('.portfolio-items');
+                const images = portfolioItems.getElementsByTagName('img');
+
+                setInterval(() => {
+                    if (imageUrls.length > 0) {
+                        for (let img of images) {
+                            img.src = "/ventura/siswa/"+imageUrls[currentIndex]+".png";
+                        }
+                        currentIndex = (currentIndex + 1) % imageUrls.length;
+                    }
+                }, intervalTime);
+            }
+});
+</script>
   <!-- Navigation -->
   <nav id="menu" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-          data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span
-            class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        <a class="navbar-brand page-scroll" href="#page-top"><i class='fas fa-award'></i> VENTURA 34</a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        <a class="navbar-brand page-scroll" href="#page-top"><i class="fas fa-award"></i> VENTURA 34</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -42,9 +68,9 @@
 
   <!--My header -->
   <header id="header">
-    <div class="swiper-container">
+    <div class="swiper-container swiper-container-horizontal">
       <div class="swiper-wrapper">
-        <div class="swiper-slide sl1">
+        <div class="swiper-slide sl1 swiper-slide-active" style="width: 797px;">
           <div class="overlay">
             <div class="h-text">
               <div class="l1">Kebangsaan</div>
@@ -54,7 +80,7 @@
             </div>
           </div>
         </div>
-        <div class="swiper-slide sl2">
+        <div class="swiper-slide sl2 swiper-slide-next" style="width: 797px;">
           <div class="overlay">
             <div class="h-text">
               <div class="l1">Jujur</div>
@@ -64,7 +90,7 @@
             </div>
           </div>
         </div>
-        <div class="swiper-slide sl3">
+        <div class="swiper-slide sl3" style="width: 797px;">
           <div class="overlay">
             <div class="h-text">
               <div class="l1">Berani</div>
@@ -75,8 +101,8 @@
           </div>
         </div>
       </div>
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-prev"><i class="fas fa-chevron-circle-left"></i></div>
+      <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
+      <div class="swiper-button-prev swiper-button-disabled"><i class="fas fa-chevron-circle-left"></i></div>
       <div class="swiper-button-next"><i class="fas fa-chevron-circle-right"></i></div>
     </div>
   </header>
@@ -107,40 +133,508 @@
       <div class="row">
 
         <!-- Template -->
-        <?php
-        $lines = explode("\n",file_get_contents("data.txt"));
-        foreach ($lines as $line): 
-        $i = explode(",",$line);
-        $nama = $i[0];
-        $ttl = $i[2];
-        $tempat = $i[3];
-        $path = "/siswa/".$i[1].".png";
-        ?>
-        <div class="portfolio-items">
+                <div class="portfolio-items">
           <div class="col-sm-6 col-md-3 col-lg-3 web">
             <div class="portfolio-item">
               <div class="hover-bg">
                 <div class="hover-text">
                   <h4>
-                    <?= $nama; ?>
-                  </h4>
+                    R41D3R                  </h4>
                   <small>
-                    <?= $tempat; ?>,
-                    <?= $ttl; ?>
-                  </small>
+                    Purwakarta,
+                    200 Mei 2077                  </small>
                 </div>
-                <img class="center-this" width="70%" src="<?= $path; ?>" class="img-responsive" alt="<?= $nama; ?>">
+                <img class="center-this" width="70%" src="/ventura/siswa/2310680.png" alt="R41D3R">
               </div>
             </div>
           </div>
         </div>
-        <?php endforeach; ?>
-
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Atmaja Adinata P.                  </h4>
+                  <small>
+                    Pekanbaru,
+                    28 Desember 2007                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310545.png" alt="Atmaja Adinata P.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Aufa Salsabila P.                  </h4>
+                  <small>
+                    Magelang,
+                    4 Februari 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310548.png" alt="Aufa Salsabila P.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Christian I. J. S.                  </h4>
+                  <small>
+                    Dairi,
+                    2 Januari 2009                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310561.png" alt="Christian I. J. S.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Christofer L. S.                  </h4>
+                  <small>
+                    Pekanbaru,
+                    25 September 2007                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310563.png" alt="Christofer L. S.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Datu Naugi S.                  </h4>
+                  <small>
+                    Makassar,
+                    7 November 2009                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310569.png" alt="Datu Naugi S.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Dhidhik Kurniawan                  </h4>
+                  <small>
+                    Klaten,
+                    1 Agustus 2007                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310575.png" alt="Dhidhik Kurniawan">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Diana Alliya D.                  </h4>
+                  <small>
+                    Jakarta,
+                    24 September 2007                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310577.png" alt="Diana Alliya D.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Dias Fatah T. R.                  </h4>
+                  <small>
+                    Binjai,
+                    30 Juli 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310578.png" alt="Dias Fatah T. R.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Dimas Kartiko W.                  </h4>
+                  <small>
+                    Magelang,
+                    13 Maret 2007                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310580.png" alt="Dimas Kartiko W.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Diva Putri A.                  </h4>
+                  <small>
+                    Bogor,
+                    19 Maret 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310582.png" alt="Diva Putri A.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Fadhil Qinthar                  </h4>
+                  <small>
+                    Depok,
+                    14 Juli 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310592.png" alt="Fadhil Qinthar">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Fathin Alfian Y.                  </h4>
+                  <small>
+                    Buton Tengah,
+                    25 Maret 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310601.png" alt="Fathin Alfian Y.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Gamaliel P. P. N. S.                  </h4>
+                  <small>
+                    Pekanbaru,
+                    1 September 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310613.png" alt="Gamaliel P. P. N. S.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Jevin Rubenaldo S.                  </h4>
+                  <small>
+                    Pekanbaru,
+                    21 September 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310643.png" alt="Jevin Rubenaldo S.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    M. Bagus H. R.                  </h4>
+                  <small>
+                    Pekanbaru,
+                    26 April 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310661.png" alt="M. Bagus H. R.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Mahmud Maghribi                  </h4>
+                  <small>
+                    Malang,
+                    11 September 2007                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310663.png" alt="Mahmud Maghribi">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    M. Fatih Alfarisi                  </h4>
+                  <small>
+                    Bekasi,
+                    18 Juni 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310680.png" alt="M. Fatih Alfarisi">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    M. Alvaro Z. S.                  </h4>
+                  <small>
+                    Banjarmasin,
+                    2 Februari 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310686.png" alt="M. Alvaro Z. S.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    M. Bek Zubair M.                  </h4>
+                  <small>
+                    Pangkal Pinang,
+                    15 Oktober 2007                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310690.png" alt="M. Bek Zubair M.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    M. Fatturrozziqqin                  </h4>
+                  <small>
+                    Sidoarjo,
+                    18 Februari 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310699.png" alt="M. Fatturrozziqqin">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    M. Robiansyah P.                  </h4>
+                  <small>
+                    Palembang,
+                    1 Maret 2009                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310718.png" alt="M. Robiansyah P.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Nadya Shafwa S.                  </h4>
+                  <small>
+                    Sorong,
+                    15 Juli 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310735.png" alt="Nadya Shafwa S.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Naomi Sheril S.                  </h4>
+                  <small>
+                    Batam,
+                    29 Agustus 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310738.png" alt="Naomi Sheril S.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Novelita Nasya P.                  </h4>
+                  <small>
+                    Semarang,
+                    10 November 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310752.png" alt="Novelita Nasya P.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Pijar Dale B.                  </h4>
+                  <small>
+                    Yogyakarta,
+                    23 Maret 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310761.png" alt="Pijar Dale B.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Putu Gede Bayu E. P.                  </h4>
+                  <small>
+                    Bali,
+                    5 Juni 2007                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310764.png" alt="Putu Gede Bayu E. P.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Rahel Marchiella A.                  </h4>
+                  <small>
+                    Balikpapan,
+                    4 Maret 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310773.png" alt="Rahel Marchiella A.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Rakha Adyra D.                  </h4>
+                  <small>
+                    Jakarta,
+                    16 November 2007                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310779.png" alt="Rakha Adyra D.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Rizky Fahreza F. P. R.                  </h4>
+                  <small>
+                    Jakarta,
+                    23 Februari 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310806.png" alt="Rizky Fahreza F. P. R.">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="portfolio-items">
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+            <div class="portfolio-item">
+              <div class="hover-bg">
+                <div class="hover-text">
+                  <h4>
+                    Sulthan S. S. S.                  </h4>
+                  <small>
+                    Surakarta,
+                    22 Maret 2008                  </small>
+                </div>
+                <img class="center-this" width="70%" src="siswa/2310831.png" alt="Sulthan S. S. S.">
+              </div>
+            </div>
+          </div>
+        </div>
+        
 
       </div>
     </div>
   </div>
-  </div>
+  
 
   <!-- Tim Section -->
   <div id="mapel" class="skills">
@@ -231,64 +725,7 @@
     </div>
   </div>
 
-  <!-- Experience Section -->
 
-  <div id="experience">
-    <div class="container">
-      <section class="timeline">
-        <ul>
-          <li>
-            <div>
-              <h1>1934</h1>
-              <h2>HIT</h2>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et
-                accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <h1>1937</h1>
-              <h2>HIT</h2>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et
-                accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <h1>1940</h1>
-              <h2>HIT</h2>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et
-                accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <h1>1943</h1>
-              <h2>HIT</h2>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et
-                accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <h1>1946</h1>
-              <h2>HIT</h2>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et
-                accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <h1>1956</h1>
-              <h2>HIT</h2>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et
-                accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
-            </div>
-          </li>
-        </ul>
-      </section>
-    </div>
-  </div>
 
   <!-- Contact Section -->
   <div id="contact" class="text-center">
@@ -296,8 +733,7 @@
       <div class="container">
         <div class="col-md-8 col-md-offset-2 section-title">
           <h2>Get In Touch</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo
-            nibh ante facilisis bibendum dolor apibus lornare diam commodo nibh.</p>
+          <p>Belom jadi.</p>
         </div>
         <div class="col-md-8 col-md-offset-2">
 
@@ -316,22 +752,23 @@
   <div id="footer">
     <div class="container text-center">
       <div class="fnav">
-        <p>Copyright &copy; 2024 Ventura 34. Designed by Raja</p>
+        <p>Copyright © 2024 Ventura 34. Designed by Raja</p>
       </div>
     </div>
   </div>
   <script type="text/javascript" src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
   <!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.6/SmoothScroll.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jqBootstrapValidation/1.3.7/jqBootstrapValidation.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/prettyPhoto/3.1.6/js/jquery.prettyPhoto.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.0/js/swiper.min.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.6/SmoothScroll.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqBootstrapValidation/1.3.7/jqBootstrapValidation.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prettyPhoto/3.1.6/js/jquery.prettyPhoto.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.0/js/swiper.min.js"></script>
   <script src="./script.js"></script>
 
-</body>
 
-</html>
+
+</body>
+  </html>
